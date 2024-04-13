@@ -1,0 +1,11 @@
+﻿@model Sollicitatieproef.Core.Models.Gebruikers.GebruikerVerwijderenViewModel
+
+
+<div class="modal-body">
+    <form id="delete-form" asp-controller="Gebruikers" asp-action="Verwijderen" method="post">
+        <input type="hidden" asp-for="@Model.GebruikerId" />
+        <input type="hidden" asp-for="@Model.Voornaam" />
+        <input type="hidden" asp-for="@Model.Naam" />
+    </form>
+    <div>Ben je zeker dat je gebruiker @Model.Voornaam @Model.Naam wil verwijderen?</div>
+ </div>

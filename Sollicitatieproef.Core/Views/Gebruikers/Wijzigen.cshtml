@@ -1,0 +1,68 @@
+﻿@model Sollicitatieproef.Core.Models.Gebruikers.GebruikerWijzigenViewModel
+@{
+    ViewBag.Title = "Gebruiker wijzigen";
+}
+
+
+<div>
+    <h1>Gebruiker wijzigen</h1>
+    <hr />
+    <div class="container-fluid">
+        <div class="row">
+            <form id="update-form" asp-controller="Gebruikers" asp-action="Wijzigen" method="post">
+                <div class="form-group row my-2">
+                    <label class="col-sm-2" asp-for="Gebruiker.Serienummer"></label>
+                    <div class="col-sm-3">
+                        <input type="text" readonly class="form-control" asp-for="Gebruiker.Serienummer"/>
+                    </div>
+                </div>
+                <div class="form-group row my-2">
+                    <label class="col-sm-2" asp-for="Gebruiker.Voornaam"></label>
+                    <div class="col-sm-3">
+                        <input class="form-control" asp-for="Gebruiker.Voornaam" />
+                    </div>
+                </div>
+                <div class="form-group row my-2">
+                    <label class="col-sm-2" asp-for="Gebruiker.Naam"></label>
+                    <div class="col-sm-3">
+                        <input class="form-control" asp-for="Gebruiker.Naam" />
+                    </div>
+                </div>
+                <div class="form-group row my-2">
+                    <label class="col-sm-2" asp-for="Gebruiker.Emailadres"></label>
+                    <div class="col-sm-3">
+                        <input class="form-control" asp-for="Gebruiker.Emailadres" />
+                    </div>
+                </div>
+                <div class="form-group row my-2">
+                    <label class="col-sm-2" asp-for="Gebruiker.Geboortedatum"></label>
+                    <div class="col-sm-3">
+                        <input class="form-control" asp-for="Gebruiker.Geboortedatum"/>
+                    </div>
+                </div>
+                <div class="form-group row my-2">
+                    <div class="col-sm-2">Rechten</div>
+                    <div class="col-sm-3">
+                        @for (var i = 0; i < Model.Gebruiker.Rechten.Count; i++)
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" asp-for="@Model.Gebruiker.Rechten[i].IsToegekend"/>
+                                <input type="hidden" asp-for="@Model.Gebruiker.Rechten[i].Id"/>
+                                <input type="hidden" asp-for="@Model.Gebruiker.Rechten[i].Omschrijving"/>
+                                <label class="form-check-label" asp-for="@Model.Gebruiker.Rechten[i].IsToegekend">@Model.Gebruiker.Rechten[i].Omschrijving</label>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <input type="hidden" asp-for="@Model.Gebruiker.Id" />
+            </form>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-3 offset-sm-2">
+                <button type="submit" form="update-form" class="btn btn-primary">Wijzigen</button>
+                <a asp-controller="Gebruikers" asp-action="Index" class="btn btn-secondary">Terug naar lijst</a>
+            </div>
+        </div>
+    </div>
+</div>

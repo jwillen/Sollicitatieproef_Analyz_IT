@@ -1,0 +1,86 @@
+﻿@model Sollicitatieproef.Core.Models.Gebruikers.IndexViewModel
+
+@{
+    ViewBag.Title = "Gebruikers";
+}
+
+
+<div>
+    <h1>Gebruikers</h1>
+    <hr />
+
+    <a asp-action="Toevoegen" class="btn btn-success"><i class="fa-solid fa-plus fa-fw"></i>Toevoegen</a>
+    @if(Model.Gebruikers.Count > 0)
+    {
+        <div class="mt-3">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col" class="col-sm-1">Serienummer</th>
+                        <th scope="col" class="col-sm-2">Voornaam</th>
+                        <th scope="col" class="col-sm-2">Naam</th>
+                        <th scope="col" class="col-sm-5">E-mailadres</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var gebruiker in Model.Gebruikers)
+                    {
+                        <tr>
+                            <td class="text-end">@gebruiker.Serienummer</td>
+                            <td>@gebruiker.Voornaam</td>
+                            <td>@gebruiker.Naam</td>
+                            <td>@gebruiker.Emailadres</td>
+                            <td class="text-end">
+                                <div>
+                                    <a asp-action="Wijzigen" asp-route-id="@gebruiker.Id" class="btn btn-dark"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <button class="btn btn-dark" onclick="openModal(@gebruiker.Id)"><i class="fa-solid fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+
+<div class="modal fade" id="deleteGebruikerModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Gebruiker verwijderen</h5>
+            </div>
+            <div id="modalContainer"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal()">Nee</button>
+                <button type="submit" form="delete-form" class="btn btn-primary">Ja</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        function openModal(gebruikerId) {
+            $.ajax({
+                url: '/Gebruikers/Verwijderen',
+                type: 'GET',
+                data: { id: gebruikerId },
+                success: function (data) {
+                    $('#modalContainer').html(data);
+                    $('#deleteGebruikerModal').modal('show');
+                },
+                error: function () {
+                    alert('Error occurred while fetching data.');
+                }
+            });
+        }
+
+        function closeModal() {
+            $('#deleteGebruikerModal').modal('hide')
+        }
+    </script>
+}

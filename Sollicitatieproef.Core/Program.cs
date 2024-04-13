@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Sollicitatieproef.Core.DataAccess;
+using Sollicitatieproef.Core.Services;
 
 namespace Sollicitatieproef.Core;
 
@@ -12,6 +13,8 @@ public class Program
         builder.Services.AddHttpContextAccessor();
         builder.Services.AddDbContext<DataContext>(options => { options.UseSqlServer(builder.Configuration.GetConnectionString("DataContext")); });
         builder.Services.AddScoped<IDataContext, DataContext>();
+        builder.Services.AddScoped<ICommandService, CommandService>();
+        builder.Services.AddScoped<IQueryService, QueryService>();
         builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
         var app = builder.Build();
