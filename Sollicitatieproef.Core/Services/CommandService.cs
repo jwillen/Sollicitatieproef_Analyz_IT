@@ -25,7 +25,7 @@ public class CommandService : ICommandService
             Voornaam = viewModel.Voornaam,
             Naam = viewModel.Naam,
             Emailadres = viewModel.Emailadres,
-            Geboortedatum = viewModel.Geboortedatum,
+            Geboortedatum = viewModel.Geboortedatum!.Value,
             Serienummer = serienummers.DefaultIfEmpty(0).Max() + 1
         };
 
@@ -60,7 +60,7 @@ public class CommandService : ICommandService
 
         gebruiker.Voornaam = viewModel.Voornaam;
         gebruiker.Naam = viewModel.Naam;
-        gebruiker.Geboortedatum = viewModel.Geboortedatum;
+        gebruiker.Geboortedatum = viewModel.Geboortedatum!.Value;
         gebruiker.Emailadres = viewModel.Emailadres;
 
         foreach (var recht in viewModel.Rechten)

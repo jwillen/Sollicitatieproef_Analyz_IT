@@ -16,25 +16,33 @@
                     <label class="col-sm-2" asp-for="Gebruiker.Voornaam"></label>                    
                     <div class="col-sm-3">
                         <input class="form-control" asp-for="Gebruiker.Voornaam" />
+                        @Html.ValidationMessageFor(model => model.Gebruiker.Voornaam, "", new { @class = "text-danger"})
                     </div>
+                    
                 </div>
                 <div class="form-group row my-2">
                     <label class="col-sm-2" asp-for="Gebruiker.Naam"></label>
                     <div class="col-sm-3">
                         <input class="form-control" asp-for="Gebruiker.Naam" />
+                        @Html.ValidationMessageFor(model => model.Gebruiker.Naam, "", new { @class = "text-danger" })
                     </div>
+
                 </div>
                 <div class="form-group row my-2">
                     <label class="col-sm-2" asp-for="Gebruiker.Emailadres"></label>
                     <div class="col-sm-3">
-                        <input class="form-control" asp-for="Gebruiker.Emailadres" />
+                        <input class="form-control" asp-for="Gebruiker.Emailadres"/>
+                        @Html.ValidationMessageFor(model => model.Gebruiker.Emailadres, "", new { @class = "text-danger" })
                     </div>
+
                 </div>
                 <div class="form-group row my-2">
                     <label class="col-sm-2" asp-for="Gebruiker.Geboortedatum"></label>
                     <div class="col-sm-3">
-                        <input class="form-control" asp-for="Gebruiker.Geboortedatum" value="dd/mm/yyyy"/>
+                        <input class="form-control" asp-for="Gebruiker.Geboortedatum"/>
+                        @Html.ValidationMessageFor(model => model.Gebruiker.Geboortedatum, "", new { @class = "text-danger" })
                     </div>
+
                 </div>
                 <div class="form-group row my-2">
                     <div class="col-sm-2">Rechten</div>
@@ -48,8 +56,9 @@
                                 <label class="form-check-label" asp-for="@Model.Gebruiker.Rechten[i].IsToegekend">@Model.Gebruiker.Rechten[i].Omschrijving</label>
                             </div>
                         }
+                        @Html.ValidationMessageFor(model => model.Gebruiker.Rechten, "", new { @class = "text-danger" })
                     </div>
-
+             
                 </div>
             </form>
         </div>

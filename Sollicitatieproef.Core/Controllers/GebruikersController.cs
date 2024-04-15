@@ -65,9 +65,10 @@ public class GebruikersController : Controller
         if (ModelState.IsValid)
         {
             await _commandService.CreateGebruikerAsync(viewModel.Gebruiker);
+            return RedirectToAction("Index");
         }
 
-        return RedirectToAction("Index");
+        return View(viewModel);
     }
 
 
@@ -106,9 +107,10 @@ public class GebruikersController : Controller
         if (ModelState.IsValid)
         {
             await _commandService.UpdateGebruikerAsync(viewModel.Gebruiker);
+            return RedirectToAction("Index");
         }
 
-        return RedirectToAction("Index");
+        return View(viewModel);
     }
 
     [HttpGet]
@@ -135,6 +137,5 @@ public class GebruikersController : Controller
 
         return RedirectToAction("Index");
     }
-
 
 }

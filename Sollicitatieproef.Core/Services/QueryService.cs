@@ -30,4 +30,27 @@ public class QueryService : IQueryService
     {
         return await _dataContext.Rechten.AsNoTracking().ToListAsync();
     }
+
+    public async Task<bool> IsEmailadresUniek(int? gebruikerId, string emailadres)
+    {
+        var emailadressen = new List<string>();
+
+        if (gebruikerId is null)
+        {
+            emailadressen = await _dataContext.Gebruikers
+                .Select(g => g.Emailadres)
+                .ToListAsync();
+        }
+
+        else
+        {
+            emailadressen = await _dataContext.Gebruikers
+                .Where(g => g.Id != gebruikerId)
+                .Select(g => g.Emailadres)
+                .ToListAsync();
+        }
+
+
+        return emailadressen.FirstOrDefault(e => e == emailadres) is null;
+    }
 }

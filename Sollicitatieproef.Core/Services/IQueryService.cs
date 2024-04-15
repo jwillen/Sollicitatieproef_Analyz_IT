@@ -9,4 +9,6 @@ public interface IQueryService
     Task<Gebruiker?> GetGebruikerByIdAsync(int id);
 
     Task<IReadOnlyList<Recht>> GetRechtenAsync();
+
+    Task<bool> IsEmailadresUniek(int? gebruikerId, string emailadres);
 }
